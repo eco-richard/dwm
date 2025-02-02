@@ -1,5 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx = 1; /* border pixel of windows */
 static const unsigned int snap = 32;    /* snap pixel */
@@ -19,7 +21,10 @@ static const char col_yellow1[] = "#ffc23a";
 static const char col_yellow2[] = "#dc9528";
 static const char col_black[] = "#181110";
 static const char col_cream[] = "#eaddbf";
-static const char col_brown[] = "#522f22";
+// static const char col_brown[] = "#522f22";
+static const char col_brown[] = "#e46c3d";
+// static const char col_brown2[] = "#873e24";
+static const char col_brown2[] = "#e4af3d";
 
 static const char col_gray1[] = "#222222";
 static const char col_gray2[] = "#444444";
@@ -29,7 +34,7 @@ static const char col_cyan[] = "#005577";
 static const char *colors[][3] = {
     /*               fg         bg         border   */
     [SchemeNorm] = {col_cream, col_yellow2, col_brown},
-    [SchemeSel] = {col_black, col_yellow2, col_brown},
+    [SchemeSel] = {col_black, col_yellow2, col_brown2},
 };
 
 /* tagging */
@@ -133,8 +138,10 @@ static const Key keys[] = {
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
             TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_BackSpace, quit, {0}},
-    {MODKEY | ControlMask | ShiftMask, XK_q, quit, {1}},
-};
+    {MODKEY | ShiftMask, XK_q, quit, {1}},
+    // Brightness settings
+    {0, XF86XK_MonBrightnessUp, spawn, SHCMD("brightnessctl set +10%")},
+    {0, XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl set 10%-")}};
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
